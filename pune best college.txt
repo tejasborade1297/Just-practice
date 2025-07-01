@@ -3,3 +3,5 @@ AIIMS
 Singhagad
 Marathwada
 Zeal JSPM
+RMS
+Rajagad
