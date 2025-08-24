@@ -1,0 +1,45 @@
+{
+	"name": "Json2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "student_info.json",
+				"folderPath": "inputfolder",
+				"container": "input"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"StudentID": {
+					"type": "integer"
+				},
+				"Name": {
+					"type": "string"
+				},
+				"Age": {
+					"type": "integer"
+				},
+				"Department": {
+					"type": "string"
+				},
+				"Email": {
+					"type": "string"
+				},
+				"Skills": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
