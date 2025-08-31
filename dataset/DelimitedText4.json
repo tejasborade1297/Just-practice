@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText2",
+	"name": "DelimitedText4",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "dataset merger row inton single row",
+				"fileName": "spliteddata",
 				"folderPath": "outputfile",
 				"container": "output"
 			},

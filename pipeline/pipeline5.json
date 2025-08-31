@@ -1,5 +1,5 @@
 {
-	"name": "merge multiple  rows into single",
+	"name": "pipeline5",
 	"properties": {
 		"activities": [
 			{
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "mergedataskill",
+						"referenceName": "dataflow3",
 						"type": "DataFlowReference"
 					},
 					"compute": {

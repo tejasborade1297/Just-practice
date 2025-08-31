@@ -1,12 +1,12 @@
 {
-	"name": "mergedataskill",
+	"name": "dataflow3",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText1",
+						"referenceName": "DelimitedText3",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText2",
+						"referenceName": "DelimitedText4",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -23,38 +23,33 @@
 			],
 			"transformations": [
 				{
-					"name": "aggregate1"
-				},
-				{
 					"name": "derivedColumn1"
 				},
 				{
-					"name": "select1"
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
 				"          empid as string,",
 				"          empname as string,",
-				"          skill as string",
+				"          skiil as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 aggregate(groupBy(empid,",
-				"          empname),",
-				"     skill = collect(skill)) ~> aggregate1",
-				"aggregate1 derive(skiil = replace(replace(replace(toString(skill),'[',''),']',''),\"''\",'')) ~> derivedColumn1",
-				"derivedColumn1 select(mapColumn(",
+				"source1 derive(skiil = split(skiil, ',')) ~> derivedColumn1",
+				"derivedColumn1 foldDown(unroll(skiil),",
+				"     mapColumn(",
 				"          empid,",
 				"          empname,",
 				"          skiil",
 				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['filename'],",
+				"     partitionFileNames:['spliteddata'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> sink1"
